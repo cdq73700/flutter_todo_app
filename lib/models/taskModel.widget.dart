@@ -19,9 +19,17 @@ class TaskModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  TaskType findByid(String id) {
-    var result = taskList.where((obj) => obj.id == id);
-    return result.isNotEmpty ? result.first : const TaskType(id: "", name: "");
+  void removeTask(String id) {
+    TaskType? task = findByid(id);
+    if (task != null) {
+      taskList.remove(task);
+      changeTaskName("");
+    }
+  }
+
+  TaskType? findByid(String id) {
+    Iterable<TaskType> result = taskList.where((obj) => obj.id == id);
+    return result.isNotEmpty ? result.first : null;
   }
 
   void changeTaskName(String newId) {
