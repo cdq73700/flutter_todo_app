@@ -8,6 +8,7 @@ class TaskListDetail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final taskProvider = Provider.of<TaskModel>(context);
-    return Center(child: Text(taskProvider.taskName));
+    final name = taskProvider.findByid(taskProvider.id).name;
+    return Center(child: Text(name));
   }
 }
