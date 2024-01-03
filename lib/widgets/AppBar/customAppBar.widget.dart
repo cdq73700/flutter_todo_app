@@ -14,12 +14,6 @@ class CustomAppBarWidget extends StatelessWidget
     return AppBar(
       title: Text(title),
       backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-      actions: [
-        IconButton(
-          icon: const Icon(Icons.search),
-          onPressed: () {},
-        ),
-      ],
     );
   }
 }
