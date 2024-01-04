@@ -33,6 +33,7 @@ class TaskModel extends ChangeNotifier {
     if (task != null) {
       taskList.remove(task);
       changeTaskName("");
+      notifyListeners();
     }
   }
 
@@ -40,6 +41,7 @@ class TaskModel extends ChangeNotifier {
     int? index = findByidTheIndex(id);
     if (index != null) {
       taskList[index] = TaskType(id: id, name: name, status: status);
+      notifyListeners();
     }
   }
 

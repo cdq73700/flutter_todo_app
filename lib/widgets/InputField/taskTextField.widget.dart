@@ -45,11 +45,13 @@ class TaskDetailTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final TextEditingController controller =
+        TextEditingController(text: task.name);
     return TextFormField(
-      controller: TextEditingController(text: task.name),
+      controller: controller,
       validator: validator,
-      onChanged: (value) {
-        onSaved(task.id, value, task.status);
+      onEditingComplete: () {
+        onSaved(task.id, controller.text, task.status);
       },
     );
   }
