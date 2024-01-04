@@ -46,8 +46,14 @@ class TaskModel extends ChangeNotifier {
   }
 
   TaskType? findByid(String id) {
-    Iterable<TaskType> result = taskList.where((obj) => obj.id == id);
+    Iterable<TaskType> result = taskList.where((element) => element.id == id);
     return result.isNotEmpty ? result.first : null;
+  }
+
+  List<TaskType> findByStatus(Status status) {
+    Iterable<TaskType> result =
+        taskList.where((element) => element.status == status);
+    return result.isNotEmpty ? result.toList() : [];
   }
 
   int? findByidTheIndex(String id) {

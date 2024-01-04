@@ -8,13 +8,37 @@ class TaskListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final taskProvider = Provider.of<TaskModel>(context);
+    final provider = Provider.of<TaskModel>(context);
 
-    return ListView.builder(itemBuilder: (BuildContext context, int index) {
-      if (taskProvider.taskList.length > index) {
-        return TaskListTile(task: taskProvider.taskList[index]);
-      }
-      return null;
-    });
+    final tasks = Status.values
+        .map((Status status) => MapEntry(status, provider.findByStatus(status)))
+        .toList();
+
+    return ListView(
+        children: tasks
+            .map((element) => _TaskListView(
+                status: element.key, list: element.value.toList()))
+            .toList());
+  }
+}
+
+class _TaskListView extends StatelessWidget {
+  const _TaskListView({required this.status, required this.list});
+
+  final Status status;
+  final List<TaskType> list;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(children: [
+      Padding(
+          padding: const EdgeInsets.symmetric(vertical: 5),
+          child: Text.rich(TextSpan(text: status.displayName))),
+      ListView.builder(
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          itemCount: list.length,
+          itemBuilder: (_, index) => TaskListTile(task: list[index])),
+    ]);
   }
 }
