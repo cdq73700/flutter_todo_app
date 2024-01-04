@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:test_application/models/taskModel.widget.dart';
 import 'package:test_application/widgets/Button/deleteButton.widget.dart';
@@ -14,6 +15,7 @@ class TaskListDetail extends StatelessWidget {
     if (task != null) {
       handleDeleteClick() {
         taskProvider.removeTask(task.id);
+        Navigator.of(context).pop();
       }
 
       return Column(

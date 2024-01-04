@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:test_application/models/taskModel.widget.dart';
 
@@ -21,6 +22,7 @@ class TaskListTile extends StatelessWidget {
             title: Text(task.name),
             onTap: () {
               taskProvider.changeTaskName(task.id);
+              context.push("/detail");
             }));
   }
 }
