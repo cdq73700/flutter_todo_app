@@ -14,8 +14,7 @@ class TaskModel extends ChangeNotifier {
   void addTask(String name) {
     Uuid uuid = const Uuid();
     String id = uuid.v1();
-    int length = taskList.length + 1;
-    taskList.add(TaskType(id: id, name: name + length.toString()));
+    taskList.add(TaskType(id: id, name: name));
     notifyListeners();
   }
 
