@@ -11,7 +11,10 @@ class Dashboard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBarWidget(title: title),
+      appBar: CustomAppBarWidget(
+        title: title,
+        actions: const [],
+      ),
       body: const TaskListView(),
       floatingActionButton: FloatingActionButton(
           onPressed: () => showModalBottomSheet(

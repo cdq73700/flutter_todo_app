@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:test_application/models/taskModel.widget.dart';
-import 'package:test_application/widgets/Button/deleteButton.widget.dart';
 
 class TaskListDetail extends StatelessWidget {
   const TaskListDetail({super.key});
@@ -13,19 +11,15 @@ class TaskListDetail extends StatelessWidget {
     final task = taskProvider.findByid(taskProvider.id);
 
     if (task != null) {
-      handleDeleteClick() {
-        taskProvider.removeTask(task.id);
-        Navigator.of(context).pop();
-      }
-
-      return Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Text.rich(
-              TextSpan(text: task.name, style: const TextStyle(fontSize: 36))),
-          DeleteOutlinedButton(
-              handlePress: handleDeleteClick, isDisable: false),
-        ],
+      return Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Text.rich(
+                TextSpan(text: task.name, style: const TextStyle(fontSize: 36)))
+          ],
+        ),
       );
     }
     return const SizedBox();
