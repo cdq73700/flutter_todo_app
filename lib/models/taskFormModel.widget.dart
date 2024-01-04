@@ -28,9 +28,9 @@ class TaskFormModel {
     }
   }
 
-  void onChangeSaved(String id, String value) {
+  void onChangeSaved(String id, String value, Status status) {
     if (formKey.currentState!.validate()) {
-      provider.editTask(id, value);
+      provider.editTask(id, value, status);
     }
   }
 }

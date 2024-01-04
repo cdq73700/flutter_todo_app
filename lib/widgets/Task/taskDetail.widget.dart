@@ -23,13 +23,16 @@ class TaskListDetail extends StatelessWidget {
             Form(
               key: formKey,
               child: TaskDetailTextField(
-                id: task.id,
-                value: task.name,
-                //controller: taskFormProvider.controller,
+                task: task,
                 validator: taskFormProvider.validator,
                 onSaved: taskFormProvider.onChangeSaved,
               ),
-            )
+            ),
+            Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+                child: Text.rich(
+                    TextSpan(text: "ステータス： ${task.status.displayName}")))
           ],
         ),
       );

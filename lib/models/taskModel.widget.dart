@@ -2,9 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
 
 class TaskType {
-  const TaskType({required this.id, required this.name});
+  const TaskType({required this.id, required this.name, required this.status});
   final String id;
   final String name;
+  final Status status;
+}
+
+enum Status {
+  incomplete("未完了"),
+  completion("完了");
+
+  const Status(this.displayName);
+
+  final String displayName;
 }
 
 class TaskModel extends ChangeNotifier {
@@ -14,7 +24,7 @@ class TaskModel extends ChangeNotifier {
   void addTask(String name) {
     Uuid uuid = const Uuid();
     String id = uuid.v1();
-    taskList.add(TaskType(id: id, name: name));
+    taskList.add(TaskType(id: id, name: name, status: Status.incomplete));
     notifyListeners();
   }
 
@@ -26,10 +36,10 @@ class TaskModel extends ChangeNotifier {
     }
   }
 
-  void editTask(String id, String name) {
+  void editTask(String id, String name, Status status) {
     int? index = findByidTheIndex(id);
     if (index != null) {
-      taskList[index] = TaskType(id: id, name: name);
+      taskList[index] = TaskType(id: id, name: name, status: status);
     }
   }
 

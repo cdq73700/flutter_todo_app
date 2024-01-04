@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:test_application/models/taskModel.widget.dart';
 
 class TaskTextField extends StatelessWidget {
   const TaskTextField(
@@ -34,23 +35,21 @@ class TaskTextField extends StatelessWidget {
 class TaskDetailTextField extends StatelessWidget {
   const TaskDetailTextField(
       {super.key,
-      required this.id,
-      required this.value,
+      required this.task,
       required this.validator,
       required this.onSaved});
 
-  final String id;
-  final String value;
+  final TaskType task;
   final String? Function(String?) validator;
-  final Function(String, String) onSaved;
+  final Function(String, String, Status) onSaved;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      initialValue: value,
+      controller: TextEditingController(text: task.name),
       validator: validator,
       onChanged: (value) {
-        onSaved(id, value);
+        onSaved(task.id, value, task.status);
       },
     );
   }
