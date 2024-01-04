@@ -30,3 +30,28 @@ class TaskTextField extends StatelessWidget {
     );
   }
 }
+
+class TaskDetailTextField extends StatelessWidget {
+  const TaskDetailTextField(
+      {super.key,
+      required this.id,
+      required this.value,
+      required this.validator,
+      required this.onSaved});
+
+  final String id;
+  final String value;
+  final String? Function(String?) validator;
+  final Function(String, String) onSaved;
+
+  @override
+  Widget build(BuildContext context) {
+    return TextFormField(
+      initialValue: value,
+      validator: validator,
+      onChanged: (value) {
+        onSaved(id, value);
+      },
+    );
+  }
+}

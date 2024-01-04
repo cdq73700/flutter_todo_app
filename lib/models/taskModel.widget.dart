@@ -26,9 +26,21 @@ class TaskModel extends ChangeNotifier {
     }
   }
 
+  void editTask(String id, String name) {
+    int? index = findByidTheIndex(id);
+    if (index != null) {
+      taskList[index] = TaskType(id: id, name: name);
+    }
+  }
+
   TaskType? findByid(String id) {
     Iterable<TaskType> result = taskList.where((obj) => obj.id == id);
     return result.isNotEmpty ? result.first : null;
+  }
+
+  int? findByidTheIndex(String id) {
+    int index = taskList.indexWhere((obj) => obj.id == id);
+    return index != -1 ? index : null;
   }
 
   void changeTaskName(String newId) {

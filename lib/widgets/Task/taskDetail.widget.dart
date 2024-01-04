@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:test_application/models/taskFormModel.widget.dart';
 import 'package:test_application/models/taskModel.widget.dart';
+import 'package:test_application/widgets/InputField/taskTextField.widget.dart';
 
 class TaskListDetail extends StatelessWidget {
   const TaskListDetail({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final formKey = GlobalKey<FormState>();
     final taskProvider = Provider.of<TaskModel>(context);
+    final taskFormProvider = TaskFormModel(context: context, formKey: formKey);
     final task = taskProvider.findByid(taskProvider.id);
 
     if (task != null) {
@@ -16,8 +20,16 @@ class TaskListDetail extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Text.rich(
-                TextSpan(text: task.name, style: const TextStyle(fontSize: 36)))
+            Form(
+              key: formKey,
+              child: TaskDetailTextField(
+                id: task.id,
+                value: task.name,
+                //controller: taskFormProvider.controller,
+                validator: taskFormProvider.validator,
+                onSaved: taskFormProvider.onChangeSaved,
+              ),
+            )
           ],
         ),
       );

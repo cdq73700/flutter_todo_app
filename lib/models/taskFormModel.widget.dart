@@ -27,4 +27,10 @@ class TaskFormModel {
       focusNode.requestFocus();
     }
   }
+
+  void onChangeSaved(String id, String value) {
+    if (formKey.currentState!.validate()) {
+      provider.editTask(id, value);
+    }
+  }
 }
