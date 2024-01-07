@@ -12,7 +12,7 @@ COPY --from=nodeBuilder /usr/local/lib/node_modules/ /usr/local/lib/node_modules
 
 RUN ln -s ${MAVEN_HOME}/bin/mvn /usr/bin/mvn
 
-ENV NODE_VERSION 21.5.0
+ENV NODE_VERSION=21.5.0
 ENV YARN_VERSION=1.22.19
 
 RUN ln -s /usr/local/bin/node /usr/local/bin/nodejs && \
