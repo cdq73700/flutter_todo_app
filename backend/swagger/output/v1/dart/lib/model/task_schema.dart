@@ -1,16 +1,17 @@
-part of swagger.api;
+library swagger.api;
 
+/// Schema for representing a Task entity.
 class TaskSchema {
   
-  String id = null;
+  String? id;
 
-  String name = null;
+  String? name;
 
-  double status = null;
+  double? status;
 
-  String createdAt = null;
+  String? createdAt;
 
-  String updatedAt = null;
+  String? updatedAt;
 
   TaskSchema();
 
@@ -20,7 +21,7 @@ class TaskSchema {
   }
 
   TaskSchema.fromJson(Map<String, dynamic> json) {
-    if (json == null) return;
+    if (json.isEmpty) return;
     id = json['id'];
     name = json['name'];
     status = json['status'];
@@ -39,13 +40,16 @@ class TaskSchema {
   }
 
   static List<TaskSchema> listFromJson(List<dynamic> json) {
-    return json == null ? new List<TaskSchema>() : json.map((value) => new TaskSchema.fromJson(value)).toList();
+    return json.isEmpty
+        ? List<TaskSchema>.empty()
+        : json.map((value) => TaskSchema.fromJson(value)).toList();
   }
 
   static Map<String, TaskSchema> mapFromJson(Map<String, Map<String, dynamic>> json) {
-    var map = new Map<String, TaskSchema>();
-    if (json != null && json.length > 0) {
-      json.forEach((String key, Map<String, dynamic> value) => map[key] = new TaskSchema.fromJson(value));
+    var map = <String, TaskSchema>{};
+    if (json.isNotEmpty) {
+      json.forEach((String key, Map<String, dynamic> value) => 
+        map[key] = TaskSchema.fromJson(value));
     }
     return map;
   }

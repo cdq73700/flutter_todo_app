@@ -1,16 +1,17 @@
-part of swagger.api;
+library swagger.api;
 
+/// Database model for representing a Task.
 class TaskModelSchemas {
   
-  String id = null;
+  String? id;
 
-  String name = null;
+  String? name;
 
-  double status = null;
+  double? status;
 
-  DateTime createdAt = null;
+  DateTime? createdAt;
 
-  DateTime updatedAt = null;
+  DateTime? updatedAt;
 
   TaskModelSchemas();
 
@@ -20,7 +21,7 @@ class TaskModelSchemas {
   }
 
   TaskModelSchemas.fromJson(Map<String, dynamic> json) {
-    if (json == null) return;
+    if (json.isEmpty) return;
     id = json['id'];
     name = json['name'];
     status = json['status'];
@@ -33,19 +34,22 @@ class TaskModelSchemas {
       'id': id,
       'name': name,
       'status': status,
-      'createdAt': createdAt == null ? '' : createdAt.toUtc().toIso8601String(),
-      'updatedAt': updatedAt == null ? '' : updatedAt.toUtc().toIso8601String()
+      'createdAt': createdAt == null ? '' : createdAt?.toUtc().toIso8601String(),
+      'updatedAt': updatedAt == null ? '' : updatedAt?.toUtc().toIso8601String()
      };
   }
 
   static List<TaskModelSchemas> listFromJson(List<dynamic> json) {
-    return json == null ? new List<TaskModelSchemas>() : json.map((value) => new TaskModelSchemas.fromJson(value)).toList();
+    return json.isEmpty
+        ? List<TaskModelSchemas>.empty()
+        : json.map((value) => TaskModelSchemas.fromJson(value)).toList();
   }
 
   static Map<String, TaskModelSchemas> mapFromJson(Map<String, Map<String, dynamic>> json) {
-    var map = new Map<String, TaskModelSchemas>();
-    if (json != null && json.length > 0) {
-      json.forEach((String key, Map<String, dynamic> value) => map[key] = new TaskModelSchemas.fromJson(value));
+    var map = <String, TaskModelSchemas>{};
+    if (json.isNotEmpty) {
+      json.forEach((String key, Map<String, dynamic> value) => 
+        map[key] = TaskModelSchemas.fromJson(value));
     }
     return map;
   }

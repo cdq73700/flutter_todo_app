@@ -1,10 +1,11 @@
-part of swagger.api;
+library swagger.api;
 
+/// Schema for the response containing health information.
 class HealthSchema {
   
-  bool success = null;
+  bool? success;
 
-  String data = null;
+  String? data;
 
   HealthSchema();
 
@@ -14,7 +15,7 @@ class HealthSchema {
   }
 
   HealthSchema.fromJson(Map<String, dynamic> json) {
-    if (json == null) return;
+    if (json.isEmpty) return;
     success = json['success'];
     data = json['data'];
   }
@@ -27,13 +28,16 @@ class HealthSchema {
   }
 
   static List<HealthSchema> listFromJson(List<dynamic> json) {
-    return json == null ? new List<HealthSchema>() : json.map((value) => new HealthSchema.fromJson(value)).toList();
+    return json.isEmpty
+        ? List<HealthSchema>.empty()
+        : json.map((value) => HealthSchema.fromJson(value)).toList();
   }
 
   static Map<String, HealthSchema> mapFromJson(Map<String, Map<String, dynamic>> json) {
-    var map = new Map<String, HealthSchema>();
-    if (json != null && json.length > 0) {
-      json.forEach((String key, Map<String, dynamic> value) => map[key] = new HealthSchema.fromJson(value));
+    var map = <String, HealthSchema>{};
+    if (json.isNotEmpty) {
+      json.forEach((String key, Map<String, dynamic> value) => 
+        map[key] = HealthSchema.fromJson(value));
     }
     return map;
   }

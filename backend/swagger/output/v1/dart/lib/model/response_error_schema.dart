@@ -1,10 +1,13 @@
-part of swagger.api;
+library swagger.api;
 
+import './error_schema.dart';
+
+/// Schema for the response containing error information.
 class ResponseErrorSchema {
   
-  bool success = null;
+  bool? success;
 
-  ErrorSchema error = null;
+  ErrorSchema? error;
 
   ResponseErrorSchema();
 
@@ -14,9 +17,9 @@ class ResponseErrorSchema {
   }
 
   ResponseErrorSchema.fromJson(Map<String, dynamic> json) {
-    if (json == null) return;
+    if (json.isEmpty) return;
     success = json['success'];
-    error = new ErrorSchema.fromJson(json['error']);
+    error = ErrorSchema.fromJson(json['error']);
   }
 
   Map<String, dynamic> toJson() {
@@ -27,13 +30,16 @@ class ResponseErrorSchema {
   }
 
   static List<ResponseErrorSchema> listFromJson(List<dynamic> json) {
-    return json == null ? new List<ResponseErrorSchema>() : json.map((value) => new ResponseErrorSchema.fromJson(value)).toList();
+    return json.isEmpty
+        ? List<ResponseErrorSchema>.empty()
+        : json.map((value) => ResponseErrorSchema.fromJson(value)).toList();
   }
 
   static Map<String, ResponseErrorSchema> mapFromJson(Map<String, Map<String, dynamic>> json) {
-    var map = new Map<String, ResponseErrorSchema>();
-    if (json != null && json.length > 0) {
-      json.forEach((String key, Map<String, dynamic> value) => map[key] = new ResponseErrorSchema.fromJson(value));
+    var map = <String, ResponseErrorSchema>{};
+    if (json.isNotEmpty) {
+      json.forEach((String key, Map<String, dynamic> value) => 
+        map[key] = ResponseErrorSchema.fromJson(value));
     }
     return map;
   }

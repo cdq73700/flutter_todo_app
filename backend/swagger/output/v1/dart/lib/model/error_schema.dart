@@ -1,14 +1,15 @@
-part of swagger.api;
+library swagger.api;
 
+/// Schema for representing a error entity.
 class ErrorSchema {
   
-  int code = null;
+  int? code;
 
-  String message = null;
+  String? message;
 
-  String path = null;
+  String? path;
 
-  String timestamp = null;
+  String? timestamp;
 
   ErrorSchema();
 
@@ -18,7 +19,7 @@ class ErrorSchema {
   }
 
   ErrorSchema.fromJson(Map<String, dynamic> json) {
-    if (json == null) return;
+    if (json.isEmpty) return;
     code = json['code'];
     message = json['message'];
     path = json['path'];
@@ -35,13 +36,16 @@ class ErrorSchema {
   }
 
   static List<ErrorSchema> listFromJson(List<dynamic> json) {
-    return json == null ? new List<ErrorSchema>() : json.map((value) => new ErrorSchema.fromJson(value)).toList();
+    return json.isEmpty
+        ? List<ErrorSchema>.empty()
+        : json.map((value) => ErrorSchema.fromJson(value)).toList();
   }
 
   static Map<String, ErrorSchema> mapFromJson(Map<String, Map<String, dynamic>> json) {
-    var map = new Map<String, ErrorSchema>();
-    if (json != null && json.length > 0) {
-      json.forEach((String key, Map<String, dynamic> value) => map[key] = new ErrorSchema.fromJson(value));
+    var map = <String, ErrorSchema>{};
+    if (json.isNotEmpty) {
+      json.forEach((String key, Map<String, dynamic> value) => 
+        map[key] = ErrorSchema.fromJson(value));
     }
     return map;
   }

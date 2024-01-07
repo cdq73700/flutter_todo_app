@@ -1,10 +1,11 @@
-part of swagger.api;
+library swagger.api;
 
+/// Schema for the request containing name and status.
 class RequestTaskPutSchema {
   
-  String name = null;
+  String? name;
 
-  double status = null;
+  double? status;
 
   RequestTaskPutSchema();
 
@@ -14,7 +15,7 @@ class RequestTaskPutSchema {
   }
 
   RequestTaskPutSchema.fromJson(Map<String, dynamic> json) {
-    if (json == null) return;
+    if (json.isEmpty) return;
     name = json['name'];
     status = json['status'];
   }
@@ -27,13 +28,16 @@ class RequestTaskPutSchema {
   }
 
   static List<RequestTaskPutSchema> listFromJson(List<dynamic> json) {
-    return json == null ? new List<RequestTaskPutSchema>() : json.map((value) => new RequestTaskPutSchema.fromJson(value)).toList();
+    return json.isEmpty
+        ? List<RequestTaskPutSchema>.empty()
+        : json.map((value) => RequestTaskPutSchema.fromJson(value)).toList();
   }
 
   static Map<String, RequestTaskPutSchema> mapFromJson(Map<String, Map<String, dynamic>> json) {
-    var map = new Map<String, RequestTaskPutSchema>();
-    if (json != null && json.length > 0) {
-      json.forEach((String key, Map<String, dynamic> value) => map[key] = new RequestTaskPutSchema.fromJson(value));
+    var map = <String, RequestTaskPutSchema>{};
+    if (json.isNotEmpty) {
+      json.forEach((String key, Map<String, dynamic> value) => 
+        map[key] = RequestTaskPutSchema.fromJson(value));
     }
     return map;
   }

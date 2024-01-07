@@ -5,8 +5,9 @@ path=/docker/swagger
 version=v1
 apipath=/docker/swagger/Api.yaml
 outputh=$path/output/$version
+template=/docker/swagger/template
 
-rm -rf $outputh/*
+rm -rf $outputh/$version
 
 java -jar $codegen generate \
     -i $apipath \
@@ -18,9 +19,12 @@ java -jar $codegen generate \
     -i $apipath \
     -l dart \
     -o $outputh/dart \
-    -D models
+    -D models \
+    -t $template
 
 java -jar $codegen generate \
     -i $apipath \
     -l openapi-yaml \
     -o $outputh/yaml
+
+./import_addition.sh

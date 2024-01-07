@@ -1,10 +1,13 @@
-part of swagger.api;
+library swagger.api;
 
+import './task_schema.dart';
+
+/// Schema for the response containing task information.
 class ResponseTaskSchema {
   
-  bool success = null;
+  bool? success;
 
-  List<TaskSchema> data = [];
+  List<TaskSchema>? data;
 
   ResponseTaskSchema();
 
@@ -14,7 +17,7 @@ class ResponseTaskSchema {
   }
 
   ResponseTaskSchema.fromJson(Map<String, dynamic> json) {
-    if (json == null) return;
+    if (json.isEmpty) return;
     success = json['success'];
     data = TaskSchema.listFromJson(json['data']);
   }
@@ -27,13 +30,16 @@ class ResponseTaskSchema {
   }
 
   static List<ResponseTaskSchema> listFromJson(List<dynamic> json) {
-    return json == null ? new List<ResponseTaskSchema>() : json.map((value) => new ResponseTaskSchema.fromJson(value)).toList();
+    return json.isEmpty
+        ? List<ResponseTaskSchema>.empty()
+        : json.map((value) => ResponseTaskSchema.fromJson(value)).toList();
   }
 
   static Map<String, ResponseTaskSchema> mapFromJson(Map<String, Map<String, dynamic>> json) {
-    var map = new Map<String, ResponseTaskSchema>();
-    if (json != null && json.length > 0) {
-      json.forEach((String key, Map<String, dynamic> value) => map[key] = new ResponseTaskSchema.fromJson(value));
+    var map = <String, ResponseTaskSchema>{};
+    if (json.isNotEmpty) {
+      json.forEach((String key, Map<String, dynamic> value) => 
+        map[key] = ResponseTaskSchema.fromJson(value));
     }
     return map;
   }
