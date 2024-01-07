@@ -41,7 +41,7 @@ post:
     - **name** (string): The name of the task.
 
     ### Responses:
-    - **200 OK**: Successful operation. Returns detailed task information.
+    - **201 OK**: Successful operation. Returns detailed task information.
     - **400 Bad Request**: Invalid ID supplied. Returns an error response.
 
   operationId: postTask

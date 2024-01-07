@@ -82,7 +82,7 @@ paths:
         - **name** (string): The name of the task.
 
         ### Responses:
-        - **200 OK**: Successful operation. Returns detailed task information.
+        - **201 OK**: Successful operation. Returns detailed task information.
         - **400 Bad Request**: Invalid ID supplied. Returns an error response.
       operationId: postTask
       requestBody:
@@ -213,6 +213,10 @@ paths:
       summary: Delete Task by ID
       description: |
         This endpoint deletes a task with the specified ID.
+
+        ### Responses:
+        - **204 OK**: Successful operation.
+        - **400 Bad Request**: Invalid ID supplied. Returns an error response.
       operationId: deleteTaskById
       parameters:
       - name: id

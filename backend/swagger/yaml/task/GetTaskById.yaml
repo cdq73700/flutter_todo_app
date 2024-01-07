@@ -101,6 +101,10 @@ delete:
   summary: Delete Task by ID
   description: |
     This endpoint deletes a task with the specified ID.
+
+    ### Responses:
+    - **204 OK**: Successful operation.
+    - **400 Bad Request**: Invalid ID supplied. Returns an error response.
     
   operationId: deleteTaskById
   parameters:
