@@ -1,0 +1,14 @@
+components:
+  schemas:
+    HealthSchema:
+      description: Schema for the response containing health information.
+      type: object
+      xml:
+        name: HealthSchema
+      properties:
+        success:
+          type: boolean
+          example: true
+        data:
+          type: string
+          example: OK

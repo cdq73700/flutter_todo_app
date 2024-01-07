@@ -1,0 +1,351 @@
+openapi: 3.0.3
+info:
+  title: todo API
+  description: This is todo API
+  version: 1.0.0
+servers:
+- url: http://backend:4000/api/v1
+tags:
+- name: task
+  description: Operations about task
+paths:
+  /health:
+    get:
+      tags:
+      - health
+      summary: Check Health Status
+      description: |
+        This endpoint is used to check the health status of the service.
+
+        ### Responses:
+        - **200 OK**: The service is healthy.
+        - **400 Bad Request**: Invalid request supplied. Returns an error response.
+      operationId: checkHealth
+      responses:
+        "200":
+          description: The service is healthy
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthSchema'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/HealthSchema'
+        "400":
+          description: Invalid request supplied
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseErrorSchema'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ResponseErrorSchema'
+  /task:
+    get:
+      tags:
+      - task
+      summary: Retrieve Task List
+      description: |
+        This endpoint retrieves a list of tasks.
+
+        ### Responses:
+        - **200 OK**: Successful operation. Returns a list of tasks.
+        - **400 Bad Request**: Invalid request supplied. Returns an error response.
+      operationId: retrieveTaskList
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseTaskSchema'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ResponseTaskSchema'
+        "400":
+          description: Invalid request supplied
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseErrorSchema'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ResponseErrorSchema'
+    post:
+      tags:
+      - task
+      summary: Create Task
+      description: |
+        This endpoint is used to create a new task an existing task.
+
+        ### Request Body:
+        - **name** (string): The name of the task.
+
+        ### Responses:
+        - **200 OK**: Successful operation. Returns detailed task information.
+        - **400 Bad Request**: Invalid ID supplied. Returns an error response.
+      operationId: postTask
+      requestBody:
+        description: The name and status of the task.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RequestTaskPostSchema'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/RequestTaskPostSchema'
+      responses:
+        "201":
+          description: Task list created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseTaskSchema'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ResponseTaskSchema'
+        "400":
+          description: Invalid request or ID supplied
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseErrorSchema'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ResponseErrorSchema'
+  /task/{id}:
+    get:
+      tags:
+      - task
+      summary: Retrieve Task by ID
+      description: |
+        This endpoint retrieves detailed information about a specific task based on its unique identifier (ID).
+
+        ### Parameters:
+        - **id** (path): The unique identifier of the task to be retrieved.
+
+        ### Responses:
+        - **200 OK**: Successful operation. Returns detailed task information.
+        - **400 Bad Request**: Invalid ID supplied. Returns an error response.
+      operationId: retrieveTaskById
+      parameters:
+      - name: id
+        in: path
+        description: ID of the task to return
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseTaskSchema'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ResponseTaskSchema'
+        "400":
+          description: Invalid ID supplied
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseErrorSchema'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ResponseErrorSchema'
+    put:
+      tags:
+      - task
+      summary: Update Task by ID
+      description: |
+        This endpoint is used to update an existing task.
+
+        ### Parameters:
+        - **id** (path): The unique identifier of the task to be retrieved.
+
+        ### Request Body:
+        - **name** (string): The name of the task.
+        - **status** (number): The status of the task.
+
+        ### Responses:
+        - **200 OK**: Successful operation. Returns detailed task information.
+        - **400 Bad Request**: Invalid ID supplied. Returns an error response.
+      operationId: putTaskById
+      parameters:
+      - name: id
+        in: path
+        description: ID of the task to updated
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: The name and status of the task.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RequestTaskPutSchema'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/RequestTaskPutSchema'
+      responses:
+        "200":
+          description: Task updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseTaskSchema'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ResponseTaskSchema'
+        "400":
+          description: Invalid request or ID supplied
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseErrorSchema'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ResponseErrorSchema'
+    delete:
+      tags:
+      - task
+      summary: Delete Task by ID
+      description: |
+        This endpoint deletes a task with the specified ID.
+      operationId: deleteTaskById
+      parameters:
+      - name: id
+        in: path
+        description: ID of the task to delte
+        required: true
+        schema:
+          type: string
+      responses:
+        "204":
+          description: Delete successful
+        "400":
+          description: Invalid ID supplied
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseErrorSchema'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ResponseErrorSchema'
+components:
+  schemas:
+    TaskModelSchemas:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        status:
+          type: number
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+      description: Database model for representing a Task.
+      xml:
+        name: TaskModelSchema
+    HealthSchema:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: true
+        data:
+          type: string
+          example: OK
+      description: Schema for the response containing health information.
+      xml:
+        name: HealthSchema
+    ResponseErrorSchema:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: false
+        error:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorSchema'
+      description: Schema for the response containing error information.
+      xml:
+        name: ResponseErrorSchema
+    ErrorSchema:
+      required:
+      - code
+      - message
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int64
+        message:
+          type: string
+          example: error
+        path:
+          type: string
+        timestamp:
+          type: string
+          example: 2023/12/13 8:39:04
+      description: Schema for representing a error entity.
+      xml:
+        name: ErrorSchema
+    ResponseTaskSchema:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: true
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/TaskSchema'
+      description: Schema for the response containing task information.
+      xml:
+        name: ResponseTaskSchema
+    TaskSchema:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        status:
+          type: number
+        createdAt:
+          type: string
+          example: 2023/12/13 8:39:04
+        updatedAt:
+          type: string
+          example: 2023/12/13 8:39:04
+      description: Schema for representing a Task entity.
+      xml:
+        name: TaskSchema
+    RequestTaskPostSchema:
+      type: object
+      properties:
+        name:
+          type: string
+      description: Schema for the request containing name.
+      xml:
+        name: RequestTaskPostSchema
+    RequestTaskPutSchema:
+      type: object
+      properties:
+        name:
+          type: string
+        status:
+          type: number
+      description: Schema for the request containing name and status.
+      xml:
+        name: RequestTaskPutSchema

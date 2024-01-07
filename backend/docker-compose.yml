@@ -1,0 +1,13 @@
+version: '3.9'
+
+services:
+  swagger:
+    build:
+      context: .
+      dockerfile: ./Dockerfile/Swagger.Dockerfile
+    profiles: [ "dev" ]
+    ports:
+      - 30001:3001
+    volumes:
+      - ./swagger:/docker/swagger
+    tty: true

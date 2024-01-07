@@ -1,0 +1,124 @@
+get:
+  tags:
+    - task
+  summary: Retrieve Task by ID
+  description: |
+    This endpoint retrieves detailed information about a specific task based on its unique identifier (ID).
+
+    ### Parameters:
+    - **id** (path): The unique identifier of the task to be retrieved.
+
+    ### Responses:
+    - **200 OK**: Successful operation. Returns detailed task information.
+    - **400 Bad Request**: Invalid ID supplied. Returns an error response.
+
+  operationId: retrieveTaskById
+  parameters:
+    - in: path
+      name: id
+      description: ID of the task to return
+      required: true
+      schema:
+        type: string
+  responses:
+    "200":
+      description: Successful operation
+      content:
+        application/json:
+          schema:
+            $ref: 'Schema.yaml#/components/schemas/ResponseTaskSchema'
+        application/xml:
+          schema:
+            $ref: 'Schema.yaml#/components/schemas/ResponseTaskSchema'
+    "400":
+      description: Invalid ID supplied
+      content:
+        application/json:
+          schema:
+            $ref: '../error/Schema.yaml#/components/schemas/ResponseErrorSchema'
+        application/xml:
+          schema:
+            $ref: '../error/Schema.yaml#/components/schemas/ResponseErrorSchema'
+
+put:
+  tags:
+    - task
+  summary: Update Task by ID
+  description: |
+    This endpoint is used to update an existing task.
+
+    ### Parameters:
+    - **id** (path): The unique identifier of the task to be retrieved.
+
+    ### Request Body:
+    - **name** (string): The name of the task.
+    - **status** (number): The status of the task.
+
+    ### Responses:
+    - **200 OK**: Successful operation. Returns detailed task information.
+    - **400 Bad Request**: Invalid ID supplied. Returns an error response.
+
+  operationId: putTaskById
+  parameters:
+    - in: path
+      name: id
+      description: ID of the task to updated
+      required: true
+      schema:
+        type: string
+  requestBody:
+    description: The name and status of the task.
+    content:
+      application/json:
+        schema:
+          $ref: 'Schema.yaml#/components/schemas/RequestTaskPutSchema'
+      application/xml:
+        schema:
+          $ref: 'Schema.yaml#/components/schemas/RequestTaskPutSchema'
+  responses:
+    "200":
+      description: Task updated successfully
+      content:
+        application/json:
+          schema:
+            $ref: 'Schema.yaml#/components/schemas/ResponseTaskSchema'
+        application/xml:
+          schema:
+            $ref: 'Schema.yaml#/components/schemas/ResponseTaskSchema'
+    "400":
+      description: Invalid request or ID supplied
+      content:
+        application/json:
+          schema:
+            $ref: '../error/Schema.yaml#/components/schemas/ResponseErrorSchema'
+        application/xml:
+          schema:
+            $ref: '../error/Schema.yaml#/components/schemas/ResponseErrorSchema'
+
+delete:
+  tags:
+    - task
+  summary: Delete Task by ID
+  description: |
+    This endpoint deletes a task with the specified ID.
+    
+  operationId: deleteTaskById
+  parameters:
+    - in: path
+      name: id
+      description: ID of the task to delte
+      required: true
+      schema:
+        type: string
+  responses:
+    "204":
+      description: Delete successful
+    "400":
+      description: Invalid ID supplied
+      content:
+        application/json:
+          schema:
+            $ref: '../error/Schema.yaml#/components/schemas/ResponseErrorSchema'
+        application/xml:
+          schema:
+            $ref: '../error/Schema.yaml#/components/schemas/ResponseErrorSchema'

@@ -1,0 +1,38 @@
+openapi: 3.0.3
+info:
+  title: todo API
+  version: 1.0.0
+  description: This is todo API
+servers:
+  - url: http://backend:4000/api/v1
+tags:
+  - name: task
+    description: Operations about task
+paths:
+  /health:
+    $ref: /docker/swagger/yaml/health/Health.yaml
+  /task:
+    $ref: /docker/swagger/yaml/task/GetTask.yaml
+  /task/{id}:
+    $ref: /docker/swagger/yaml/task/GetTaskById.yaml
+components:
+  schemas:
+    TaskModelSchemas:
+      description: Database model for representing a Task.
+      type: object
+      xml:
+        name: TaskModelSchema
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        status:
+          type: number
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time

@@ -1,0 +1,75 @@
+get:
+  tags:
+    - task
+  summary: Retrieve Task List
+  description: |
+    This endpoint retrieves a list of tasks.
+
+    ### Responses:
+    - **200 OK**: Successful operation. Returns a list of tasks.
+    - **400 Bad Request**: Invalid request supplied. Returns an error response.
+
+  operationId: retrieveTaskList
+  responses:
+    "200":
+      description: Successful operation
+      content:
+        application/json:
+          schema:
+            $ref: 'Schema.yaml#/components/schemas/ResponseTaskSchema'
+        application/xml:
+          schema:
+            $ref: 'Schema.yaml#/components/schemas/ResponseTaskSchema'
+    "400":
+      description: Invalid request supplied
+      content:
+        application/json:
+          schema:
+            $ref: '../error/Schema.yaml#/components/schemas/ResponseErrorSchema'
+        application/xml:
+          schema:
+            $ref: '../error/Schema.yaml#/components/schemas/ResponseErrorSchema'
+
+post:
+  tags:
+    - task
+  summary: Create Task
+  description: |
+    This endpoint is used to create a new task an existing task.
+
+    ### Request Body:
+    - **name** (string): The name of the task.
+
+    ### Responses:
+    - **200 OK**: Successful operation. Returns detailed task information.
+    - **400 Bad Request**: Invalid ID supplied. Returns an error response.
+
+  operationId: postTask
+  requestBody:
+    description: The name and status of the task.
+    content:
+      application/json:
+        schema:
+          $ref: 'Schema.yaml#/components/schemas/RequestTaskPostSchema'
+      application/xml:
+        schema:
+          $ref: 'Schema.yaml#/components/schemas/RequestTaskPostSchema'
+  responses:
+    "201":
+      description: Task list created successfully
+      content:
+        application/json:
+          schema:
+            $ref: 'Schema.yaml#/components/schemas/ResponseTaskSchema'
+        application/xml:
+          schema:
+            $ref: 'Schema.yaml#/components/schemas/ResponseTaskSchema'
+    "400":
+      description: Invalid request or ID supplied
+      content:
+        application/json:
+          schema:
+            $ref: '../error/Schema.yaml#/components/schemas/ResponseErrorSchema'
+        application/xml:
+          schema:
+            $ref: '../error/Schema.yaml#/components/schemas/ResponseErrorSchema'

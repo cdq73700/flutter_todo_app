@@ -1,0 +1,52 @@
+components:
+  schemas:
+    TaskSchema:
+      description: Schema for representing a Task entity.
+      type: object
+      xml:
+        name: TaskSchema
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        status:
+          type: number
+        createdAt:
+          type: string
+          example: "2023/12/13 8:39:04"
+        updatedAt:
+          type: string
+          example: "2023/12/13 8:39:04"
+    ResponseTaskSchema:
+      description: Schema for the response containing task information.
+      type: object
+      xml:
+        name: ResponseTaskSchema
+      properties:
+        success:
+          type: boolean
+          example: true
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/TaskSchema'
+    RequestTaskPutSchema:
+      description: Schema for the request containing name and status.
+      type: object
+      xml:
+        name: RequestTaskPutSchema
+      properties:
+        name:
+          type: string
+        status:
+          type: number
+    RequestTaskPostSchema:
+      description: Schema for the request containing name.
+      type: object
+      xml:
+        name: RequestTaskPostSchema
+      properties:
+        name:
+          type: string

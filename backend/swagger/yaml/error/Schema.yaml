@@ -1,0 +1,35 @@
+components:
+  schemas:
+    ErrorSchema:
+      description: Schema for representing a error entity.
+      type: object
+      required:
+        - code
+        - message
+      xml:
+        name: ErrorSchema
+      properties:
+        code:
+          type: integer
+          format: int64
+        message:
+          type: string
+          example: error
+        path:
+          type: string
+        timestamp:
+          type: string
+          example: "2023/12/13 8:39:04"
+    ResponseErrorSchema:
+      description: Schema for the response containing error information.
+      type: object
+      xml:
+        name: ResponseErrorSchema
+      properties:
+        success:
+          type: boolean
+          example: false
+        error:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorSchema'

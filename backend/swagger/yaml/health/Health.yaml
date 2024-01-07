@@ -1,0 +1,31 @@
+get:
+  tags:
+    - health
+  summary: Check Health Status
+  description: |
+    This endpoint is used to check the health status of the service.
+
+    ### Responses:
+    - **200 OK**: The service is healthy.
+    - **400 Bad Request**: Invalid request supplied. Returns an error response.
+
+  operationId: checkHealth
+  responses:
+    "200":
+      description: The service is healthy
+      content:
+        application/json:
+          schema:
+            $ref: 'Schema.yaml#/components/schemas/HealthSchema'
+        application/xml:
+          schema:
+            $ref: 'Schema.yaml#/components/schemas/HealthSchema'
+    "400":
+      description: Invalid request supplied
+      content:
+        application/json:
+          schema:
+            $ref: '../error/Schema.yaml#/components/schemas/ResponseErrorSchema'
+        application/xml:
+          schema:
+            $ref: '../error/Schema.yaml#/components/schemas/ResponseErrorSchema'
