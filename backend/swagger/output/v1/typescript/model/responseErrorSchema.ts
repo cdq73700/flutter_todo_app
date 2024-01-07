@@ -16,5 +16,5 @@ import { ErrorSchema } from './errorSchema';
  */
 export interface ResponseErrorSchema { 
     success?: boolean;
-    error?: Array<ErrorSchema>;
+    error?: ErrorSchema;
 }

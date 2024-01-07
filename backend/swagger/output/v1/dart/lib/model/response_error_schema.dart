@@ -4,7 +4,7 @@ class ResponseErrorSchema {
   
   bool success = null;
 
-  List<ErrorSchema> error = [];
+  ErrorSchema error = null;
 
   ResponseErrorSchema();
 
@@ -16,7 +16,7 @@ class ResponseErrorSchema {
   ResponseErrorSchema.fromJson(Map<String, dynamic> json) {
     if (json == null) return;
     success = json['success'];
-    error = ErrorSchema.listFromJson(json['error']);
+    error = new ErrorSchema.fromJson(json['error']);
   }
 
   Map<String, dynamic> toJson() {

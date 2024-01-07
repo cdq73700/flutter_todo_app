@@ -30,6 +30,5 @@ components:
           type: boolean
           example: false
         error:
-          type: array
-          items:
-            $ref: '#/components/schemas/ErrorSchema'
+          $ref: '#/components/schemas/ErrorSchema'
+            
