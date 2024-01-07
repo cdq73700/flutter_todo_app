@@ -1,6 +1,18 @@
 version: '3.9'
 
 services:
+  backend:
+    build:
+      context: .
+      dockerfile: ./Dockerfile/Backend.Dockerfile
+    ports:
+      - 4000:4000
+    volumes:
+      - ./src:/docker/backend
+      - ./swagger/output:/docker/backend/swagger
+    environment:
+      - ORIGIN=localhost:4000
+    tty: true
   swagger:
     build:
       context: .
