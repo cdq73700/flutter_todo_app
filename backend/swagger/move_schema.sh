@@ -8,6 +8,9 @@ outpath=$path/$version
 
 rm -rf $outpath
 
+mkdir -p $outpath/docs
+mkdir -p $outpath/model
+
 docs=/docker/swagger/output/$version/dart/docs
 model=/docker/swagger/output/$version/dart/lib/model
 
