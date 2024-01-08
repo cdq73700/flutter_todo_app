@@ -7,7 +7,7 @@ import { AppDataSource } from './data-source'
 
 async function bootstrap() {
   await AppDataSource.initialize()
-  const app = await NestFactory.create(AppModule)
+  const app = await NestFactory.create(AppModule, { cors: true })
   app.useGlobalFilters(new HttpExceptionFilter())
   await app.listen(4000)
 }
