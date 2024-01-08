@@ -12,7 +12,7 @@ components:
         name:
           type: string
         status:
-          type: number
+          type: integer
         createdAt:
           type: string
           example: "2023/12/13 8:39:04"

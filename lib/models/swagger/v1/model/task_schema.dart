@@ -7,7 +7,7 @@ class TaskSchema {
 
   String? name;
 
-  double? status;
+  int? status;
 
   String? createdAt;
 

@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **String** |  | [optional] [default to null]
 **name** | **String** |  | [optional] [default to null]
-**status** | **double** |  | [optional] [default to null]
+**status** | **int** |  | [optional] [default to null]
 **createdAt** | **String** |  | [optional] [default to null]
 **updatedAt** | **String** |  | [optional] [default to null]
 
