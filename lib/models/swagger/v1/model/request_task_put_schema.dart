@@ -5,7 +5,7 @@ class RequestTaskPutSchema {
   
   String? name;
 
-  double? status;
+  int? status;
 
   RequestTaskPutSchema();
 

@@ -41,7 +41,7 @@ components:
         name:
           type: string
         status:
-          type: number
+          type: integer
     RequestTaskPostSchema:
       description: Schema for the request containing name.
       type: object

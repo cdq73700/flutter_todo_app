@@ -52,7 +52,7 @@ put:
 
     ### Request Body:
     - **name** (string): The name of the task.
-    - **status** (number): The status of the task.
+    - **status** (integer): The status of the task.
 
     ### Responses:
     - **200 OK**: Successful operation. Returns detailed task information.
