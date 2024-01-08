@@ -5,9 +5,9 @@ class TaskModelSchemas {
   
   String? id;
 
-  String? name;
+  String name = "";
 
-  double? status;
+  int status = 0;
 
   DateTime? createdAt;
 
@@ -25,8 +25,8 @@ class TaskModelSchemas {
     id = json['id'];
     name = json['name'];
     status = json['status'];
-    createdAt = json['createdAt'] == null ? null : DateTime.parse(json['createdAt']);
-    updatedAt = json['updatedAt'] == null ? null : DateTime.parse(json['updatedAt']);
+    createdAt = DateTime.parse(json['createdAt']);
+    updatedAt = DateTime.parse(json['updatedAt']);
   }
 
   Map<String, dynamic> toJson() {
@@ -34,8 +34,8 @@ class TaskModelSchemas {
       'id': id,
       'name': name,
       'status': status,
-      'createdAt': createdAt == null ? '' : createdAt?.toUtc().toIso8601String(),
-      'updatedAt': updatedAt == null ? '' : updatedAt?.toUtc().toIso8601String()
+      'createdAt':createdAt?.toUtc().toIso8601String(),
+      'updatedAt':updatedAt?.toUtc().toIso8601String()
      };
   }
 

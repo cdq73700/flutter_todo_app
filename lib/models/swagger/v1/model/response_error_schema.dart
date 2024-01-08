@@ -5,7 +5,7 @@ import './error_schema.dart';
 /// Schema for the response containing error information.
 class ResponseErrorSchema {
   
-  bool? success;
+  bool success = false;
 
   ErrorSchema? error;
 

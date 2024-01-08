@@ -12,14 +12,18 @@ components:
         code:
           type: integer
           format: int64
+          default: 0
         message:
           type: string
           example: error
+          default: ""
         path:
           type: string
+          default: ""
         timestamp:
           type: string
           example: "2023/12/13 8:39:04"
+          default: ""
     ResponseErrorSchema:
       description: Schema for the response containing error information.
       type: object
@@ -29,6 +33,6 @@ components:
         success:
           type: boolean
           example: false
+          default: false
         error:
           $ref: '#/components/schemas/ErrorSchema'
-            

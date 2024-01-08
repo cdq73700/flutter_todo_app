@@ -244,17 +244,21 @@ components:
       properties:
         id:
           type: string
-          format: uuid
+          nullable: true
         name:
           type: string
+          default: ""
         status:
-          type: number
+          type: integer
+          default: 0
         createdAt:
           type: string
           format: date-time
+          nullable: true
         updatedAt:
           type: string
           format: date-time
+          nullable: true
       description: Database model for representing a Task.
       xml:
         name: TaskModelSchema
@@ -264,9 +268,11 @@ components:
         success:
           type: boolean
           example: true
+          default: false
         data:
           type: string
           example: OK
+          default: ""
       description: Schema for the response containing health information.
       xml:
         name: HealthSchema
@@ -276,6 +282,7 @@ components:
         success:
           type: boolean
           example: false
+          default: false
         error:
           $ref: '#/components/schemas/ErrorSchema'
       description: Schema for the response containing error information.
@@ -290,14 +297,18 @@ components:
         code:
           type: integer
           format: int64
+          default: 0
         message:
           type: string
           example: error
+          default: ""
         path:
           type: string
+          default: ""
         timestamp:
           type: string
           example: 2023/12/13 8:39:04
+          default: ""
       description: Schema for representing a error entity.
       xml:
         name: ErrorSchema
@@ -307,10 +318,12 @@ components:
         success:
           type: boolean
           example: true
+          default: false
         data:
           type: array
           items:
             $ref: '#/components/schemas/TaskSchema'
+          default: []
       description: Schema for the response containing task information.
       xml:
         name: ResponseTaskSchema
@@ -320,16 +333,21 @@ components:
         id:
           type: string
           format: uuid
+          nullable: true
         name:
           type: string
+          default: ""
         status:
           type: integer
+          default: 0
         createdAt:
           type: string
           example: 2023/12/13 8:39:04
+          default: ""
         updatedAt:
           type: string
           example: 2023/12/13 8:39:04
+          default: ""
       description: Schema for representing a Task entity.
       xml:
         name: TaskSchema
@@ -338,6 +356,7 @@ components:
       properties:
         name:
           type: string
+          default: ""
       description: Schema for the request containing name.
       xml:
         name: RequestTaskPostSchema
@@ -346,8 +365,10 @@ components:
       properties:
         name:
           type: string
+          default: ""
         status:
           type: integer
+          default: 0
       description: Schema for the request containing name and status.
       xml:
         name: RequestTaskPutSchema

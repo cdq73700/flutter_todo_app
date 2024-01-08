@@ -9,16 +9,21 @@ components:
         id:
           type: string
           format: uuid
+          nullable: true
         name:
           type: string
+          default: ""
         status:
           type: integer
+          default: 0
         createdAt:
           type: string
           example: "2023/12/13 8:39:04"
+          default: ""
         updatedAt:
           type: string
           example: "2023/12/13 8:39:04"
+          default: ""
     ResponseTaskSchema:
       description: Schema for the response containing task information.
       type: object
@@ -28,10 +33,12 @@ components:
         success:
           type: boolean
           example: true
+          default: false
         data:
           type: array
           items:
             $ref: '#/components/schemas/TaskSchema'
+          default: []
     RequestTaskPutSchema:
       description: Schema for the request containing name and status.
       type: object
@@ -40,8 +47,10 @@ components:
       properties:
         name:
           type: string
+          default: ""
         status:
           type: integer
+          default: 0
     RequestTaskPostSchema:
       description: Schema for the request containing name.
       type: object
@@ -50,3 +59,4 @@ components:
       properties:
         name:
           type: string
+          default: ""

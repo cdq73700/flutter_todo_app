@@ -3,13 +3,13 @@ library swagger.api;
 /// Schema for representing a error entity.
 class ErrorSchema {
   
-  int? code;
+  int code = 0;
 
-  String? message;
+  String message = "";
 
-  String? path;
+  String path = "";
 
-  String? timestamp;
+  String timestamp = "";
 
   ErrorSchema();
 

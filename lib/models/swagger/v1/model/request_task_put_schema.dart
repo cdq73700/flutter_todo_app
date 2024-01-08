@@ -3,9 +3,9 @@ library swagger.api;
 /// Schema for the request containing name and status.
 class RequestTaskPutSchema {
   
-  String? name;
+  String name = "";
 
-  int? status;
+  int status = 0;
 
   RequestTaskPutSchema();
 

@@ -25,14 +25,20 @@ components:
       properties:
         id:
           type: string
-          format: uuid
+          nullable: true
         name:
           type: string
+          default: ""
         status:
-          type: number
+          type: integer
+          default: 0
         createdAt:
           type: string
           format: date-time
+          example: "2023/12/13 8:39:04"
+          nullable: true
         updatedAt:
           type: string
           format: date-time
+          example: "2023/12/13 8:39:04"
+          nullable: true

@@ -9,6 +9,8 @@ components:
         success:
           type: boolean
           example: true
+          default: false
         data:
           type: string
           example: OK
+          default: ""

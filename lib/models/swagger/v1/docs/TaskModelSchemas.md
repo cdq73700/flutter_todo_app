@@ -9,8 +9,8 @@ import 'package:swagger/api.dart';
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **String** |  | [optional] [default to null]
-**name** | **String** |  | [optional] [default to null]
-**status** | **double** |  | [optional] [default to null]
+**name** | **String** |  | [optional] [default to &quot;&quot;]
+**status** | **int** |  | [optional] [default to 0]
 **createdAt** | [**DateTime**](DateTime.md) |  | [optional] [default to null]
 **updatedAt** | [**DateTime**](DateTime.md) |  | [optional] [default to null]
 

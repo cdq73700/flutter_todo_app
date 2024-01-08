@@ -5,9 +5,9 @@ import './task_schema.dart';
 /// Schema for the response containing task information.
 class ResponseTaskSchema {
   
-  bool? success;
+  bool success = false;
 
-  List<TaskSchema>? data;
+  List<TaskSchema> data = [];
 
   ResponseTaskSchema();
 

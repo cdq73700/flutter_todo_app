@@ -5,13 +5,13 @@ class TaskSchema {
   
   String? id;
 
-  String? name;
+  String name = "";
 
-  int? status;
+  int status = 0;
 
-  String? createdAt;
+  String createdAt = "";
 
-  String? updatedAt;
+  String updatedAt = "";
 
   TaskSchema();
 

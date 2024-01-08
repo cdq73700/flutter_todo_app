@@ -29,4 +29,6 @@ java -jar $codegen generate \
 
 ./import_addition.sh
 
+./type_modification.sh
+
 ./move_schema.sh

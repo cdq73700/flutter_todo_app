@@ -3,9 +3,9 @@ library swagger.api;
 /// Schema for the response containing health information.
 class HealthSchema {
   
-  bool? success;
+  bool success = false;
 
-  String? data;
+  String data = "";
 
   HealthSchema();
 

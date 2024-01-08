@@ -3,7 +3,7 @@ library swagger.api;
 /// Schema for the request containing name.
 class RequestTaskPostSchema {
   
-  String? name;
+  String name = "";
 
   RequestTaskPostSchema();
 
