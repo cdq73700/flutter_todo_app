@@ -22,4 +22,5 @@ services:
       - 30001:3001
     volumes:
       - ./swagger:/docker/swagger
+      - ./../lib/models/swagger:/docker/swagger/flutter
     tty: true
