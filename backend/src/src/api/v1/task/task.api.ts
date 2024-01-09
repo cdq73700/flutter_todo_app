@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common'
-import { DeleteResult, InsertResult, Repository, UpdateResult } from 'typeorm'
+import { DeleteResult, InsertResult, Repository } from 'typeorm'
 import { AppDataSource } from 'src/data-source'
 import { Task } from 'src/orm/entities/task.entity'
 import { ResponseTaskSchema } from 'swagger/v1/typescript/model/responseTaskSchema'
@@ -24,7 +24,7 @@ export class TaskApi {
     const task = new Task(name)
     const response: InsertResult = await this.repository.insert(task)
 
-    return await this.retrieveTaskById(response.generatedMaps['id'])
+    return await this.retrieveTaskById(response.generatedMaps[0].id)
   }
 
   async retrieveTaskById(id: string): Promise<ResponseTaskSchema> {
@@ -42,12 +42,12 @@ export class TaskApi {
     name: string,
     status: number
   ): Promise<ResponseTaskSchema> {
-    const response: UpdateResult = await this.repository.update(id, {
+    await this.repository.update(id, {
       name,
       status,
     })
 
-    return await this.retrieveTaskById(response.generatedMaps['id'])
+    return await this.retrieveTaskById(id)
   }
 
   async deleteTaskById(id: string): Promise<boolean> {
