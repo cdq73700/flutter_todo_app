@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:test_application/models/swagger/v1/model/response_task_schema.dart';
-import 'package:test_application/models/swagger/v1/model/task_schema.dart';
-import 'package:test_application/models/taskModel.widget.dart';
-import 'package:test_application/widgets/Task/taskListTile.widget.dart';
+import 'package:flutter_todo_app/models/swagger/v1/model/response_task_schema.dart';
+import 'package:flutter_todo_app/models/swagger/v1/model/task_schema.dart';
+import 'package:flutter_todo_app/models/taskModel.widget.dart';
+import 'package:flutter_todo_app/widgets/Task/taskListTile.widget.dart';
 
 class TaskListView extends StatelessWidget {
   const TaskListView({super.key});

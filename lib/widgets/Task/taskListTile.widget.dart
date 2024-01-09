@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:test_application/models/swagger/v1/model/task_schema.dart';
+import 'package:flutter_todo_app/models/swagger/v1/model/task_schema.dart';
 
 class TaskListTile extends StatelessWidget {
   const TaskListTile({super.key, required this.task});

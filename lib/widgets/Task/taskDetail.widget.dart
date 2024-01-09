@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:test_application/models/swagger/v1/model/task_schema.dart';
-import 'package:test_application/models/taskModel.widget.dart';
-import 'package:test_application/widgets/InputField/taskTextField.widget.dart';
+import 'package:flutter_todo_app/models/swagger/v1/model/task_schema.dart';
+import 'package:flutter_todo_app/models/taskModel.widget.dart';
+import 'package:flutter_todo_app/widgets/InputField/taskTextField.widget.dart';
 
 class TaskListDetail extends StatelessWidget {
   const TaskListDetail(

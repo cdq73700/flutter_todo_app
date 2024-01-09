@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:test_application/models/swagger/v1/model/response_task_schema.dart';
-import 'package:test_application/models/taskModel.widget.dart';
-import 'package:test_application/widgets/Button/saveButton.widget.dart';
-import 'package:test_application/widgets/InputField/taskTextField.widget.dart';
+import 'package:flutter_todo_app/models/swagger/v1/model/response_task_schema.dart';
+import 'package:flutter_todo_app/models/taskModel.widget.dart';
+import 'package:flutter_todo_app/widgets/Button/saveButton.widget.dart';
+import 'package:flutter_todo_app/widgets/InputField/taskTextField.widget.dart';
 
 class TaskAddForm extends StatefulWidget {
   const TaskAddForm({super.key});

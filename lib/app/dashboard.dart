@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:test_application/widgets/AppBar/customAppBar.widget.dart';
-import 'package:test_application/widgets/Task/taskAddField.widget.dart';
-import 'package:test_application/widgets/Task/taskListView.widget.dart';
+import 'package:flutter_todo_app/widgets/AppBar/customAppBar.widget.dart';
+import 'package:flutter_todo_app/widgets/Task/taskAddField.widget.dart';
+import 'package:flutter_todo_app/widgets/Task/taskListView.widget.dart';
 
 class Dashboard extends StatelessWidget {
   const Dashboard({super.key, required this.title});

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:test_application/app/dashboard.dart';
-import 'package:test_application/app/detail.dart';
+import 'package:flutter_todo_app/app/dashboard.dart';
+import 'package:flutter_todo_app/app/detail.dart';
 
 class Routes {
   final GoRoute homeRoutes = GoRoute(

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:test_application/models/swagger/v1/model/response_task_schema.dart';
-import 'package:test_application/models/swagger/v1/model/task_schema.dart';
-import 'package:test_application/models/taskModel.widget.dart';
-import 'package:test_application/widgets/AppBar/customAppBar.widget.dart';
-import 'package:test_application/widgets/Button/menuButton.widget.dart';
-import 'package:test_application/widgets/Task/taskDetail.widget.dart';
+import 'package:flutter_todo_app/models/swagger/v1/model/response_task_schema.dart';
+import 'package:flutter_todo_app/models/swagger/v1/model/task_schema.dart';
+import 'package:flutter_todo_app/models/taskModel.widget.dart';
+import 'package:flutter_todo_app/widgets/AppBar/customAppBar.widget.dart';
+import 'package:flutter_todo_app/widgets/Button/menuButton.widget.dart';
+import 'package:flutter_todo_app/widgets/Task/taskDetail.widget.dart';
 
 class Detail extends StatefulWidget {
   const Detail({super.key, this.id});

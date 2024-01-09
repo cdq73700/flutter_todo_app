@@ -4,10 +4,10 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart';
 import 'package:path/path.dart';
-import 'package:test_application/models/swagger/v1/model/request_task_post_schema.dart';
-import 'package:test_application/models/swagger/v1/model/request_task_put_schema.dart';
-import 'package:test_application/models/swagger/v1/model/response_error_schema.dart';
-import 'package:test_application/models/swagger/v1/model/response_task_schema.dart';
+import 'package:flutter_todo_app/models/swagger/v1/model/request_task_post_schema.dart';
+import 'package:flutter_todo_app/models/swagger/v1/model/request_task_put_schema.dart';
+import 'package:flutter_todo_app/models/swagger/v1/model/response_error_schema.dart';
+import 'package:flutter_todo_app/models/swagger/v1/model/response_task_schema.dart';
 import 'package:http/http.dart' as http;
 
 enum Status {

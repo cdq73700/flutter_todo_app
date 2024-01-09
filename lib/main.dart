@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
-import 'package:test_application/routes.dart';
-import 'package:test_application/models/taskModel.widget.dart';
+import 'package:flutter_todo_app/routes.dart';
+import 'package:flutter_todo_app/models/taskModel.widget.dart';
 
 void main() {
   runApp(MultiProvider(
