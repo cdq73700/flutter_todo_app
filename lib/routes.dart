@@ -11,9 +11,10 @@ class Routes {
           const MaterialPage(child: Dashboard(title: "Dashboard")));
 
   final GoRoute detailRoutes = GoRoute(
-      path: "/detail",
+      path: "/:id",
       name: "Detail",
-      pageBuilder: (context, state) => const MaterialPage(child: Detail()));
+      pageBuilder: (context, state) =>
+          MaterialPage(child: Detail(id: state.pathParameters["id"])));
 
   List<GoRoute> getRoutes() {
     return [homeRoutes, detailRoutes];

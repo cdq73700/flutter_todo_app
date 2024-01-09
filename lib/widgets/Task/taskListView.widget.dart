@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:test_application/models/swagger/v1/model/response_task_schema.dart';
+import 'package:test_application/models/swagger/v1/model/task_schema.dart';
 import 'package:test_application/models/taskModel.widget.dart';
 import 'package:test_application/widgets/Task/taskListTile.widget.dart';
 
@@ -8,17 +10,47 @@ class TaskListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final provider = Provider.of<TaskModel>(context);
+    return FutureBuilder(
+      future: retrieveTaskList(context),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.done) {
+          final List<TaskSchema>? tasks = snapshot.data;
 
-    final tasks = Status.values
-        .map((Status status) => MapEntry(status, provider.findByStatus(status)))
-        .toList();
+          if (tasks != null) {
+            final List<MapEntry<Status, List<TaskSchema>>> list = Status.values
+                .map((Status status) => MapEntry(
+                    status,
+                    tasks
+                        .where((TaskSchema task) => task.status == status.index)
+                        .toList()))
+                .toList();
 
-    return ListView(
-        children: tasks
-            .map((element) => _TaskListView(
-                status: element.key, list: element.value.toList()))
-            .toList());
+            return ListView(
+              children: list
+                  .map((element) =>
+                      _TaskListView(status: element.key, list: element.value))
+                  .toList(),
+            );
+          } else {
+            return ListView(children: const [
+              _TaskListView(status: Status.incomplete, list: [])
+            ]);
+          }
+        } else {
+          return const SizedBox();
+        }
+      },
+    );
+  }
+
+  Future<List<TaskSchema>> retrieveTaskList(BuildContext context) async {
+    final taskProvider = Provider.of<TaskModel>(context, listen: true);
+    final Object tasks = await taskProvider.retrieveTaskList();
+
+    if (tasks is ResponseTaskSchema) {
+      return tasks.data;
+    }
+    return List.empty();
   }
 }
 
@@ -26,7 +58,7 @@ class _TaskListView extends StatelessWidget {
   const _TaskListView({required this.status, required this.list});
 
   final Status status;
-  final List<TaskType> list;
+  final List<TaskSchema> list;
 
   @override
   Widget build(BuildContext context) {

@@ -1,12 +1,14 @@
-import 'package:flutter/material.dart';
-import 'package:uuid/uuid.dart';
+import 'dart:convert';
+import 'dart:io';
 
-class TaskType {
-  const TaskType({required this.id, required this.name, required this.status});
-  final String id;
-  final String name;
-  final Status status;
-}
+import 'package:flutter/foundation.dart';
+import 'package:http/http.dart';
+import 'package:path/path.dart';
+import 'package:test_application/models/swagger/v1/model/request_task_post_schema.dart';
+import 'package:test_application/models/swagger/v1/model/request_task_put_schema.dart';
+import 'package:test_application/models/swagger/v1/model/response_error_schema.dart';
+import 'package:test_application/models/swagger/v1/model/response_task_schema.dart';
+import 'package:http/http.dart' as http;
 
 enum Status {
   incomplete("未完了"),
@@ -17,52 +19,130 @@ enum Status {
   final String displayName;
 }
 
+const String urlBase = "http://localhost:4000/api/v1";
+const String urlBasePhone = "http://10.0.2.2:4000/api/v1";
+
+const String taskPath = "task";
+
 class TaskModel extends ChangeNotifier {
-  List<TaskType> taskList = [];
-  String id = "";
+  Future<Response> apiConnection(String path, String type,
+      {Object? body}) async {
+    Uri url;
+    Response response;
 
-  void addTask(String name) {
-    Uuid uuid = const Uuid();
-    String id = uuid.v1();
-    taskList.add(TaskType(id: id, name: name, status: Status.incomplete));
-    notifyListeners();
+    if (kIsWeb) {
+      url = Uri.parse(join(urlBase, path));
+    } else {
+      if (Platform.isAndroid || Platform.isIOS) {
+        url = Uri.parse(join(urlBasePhone, path));
+      } else {
+        url = Uri.parse(join(urlBase, path));
+      }
+    }
+
+    switch (type) {
+      case "get":
+        response = await http.get(url);
+        break;
+      case "post":
+        response = await http.post(url, body: body);
+        break;
+      case "put":
+        response = await http.put(url, body: body);
+        break;
+      case "delete":
+        response = await http.delete(url);
+        break;
+      default:
+        response = Response("", 500);
+        break;
+    }
+
+    return response;
   }
 
-  void removeTask(String id) {
-    TaskType? task = findByid(id);
-    if (task != null) {
-      taskList.remove(task);
-      changeTaskName("");
-      notifyListeners();
+  Future<Object> retrieveTaskList() async {
+    const String type = "get";
+
+    var response = await apiConnection(taskPath, type);
+    if (response.statusCode == 200) {
+      final ResponseTaskSchema tasks =
+          ResponseTaskSchema.fromJson(jsonDecode(response.body));
+      return tasks;
+    } else {
+      final ResponseErrorSchema error =
+          ResponseErrorSchema.fromJson(jsonDecode(response.body));
+      return error;
     }
   }
 
-  void editTask(String id, String name, Status status) {
-    int? index = findByidTheIndex(id);
-    if (index != null) {
-      taskList[index] = TaskType(id: id, name: name, status: status);
+  Future<Object> postTask(String name) async {
+    const String type = "post";
+    final RequestTaskPostSchema schema = RequestTaskPostSchema();
+    schema.name = name;
+
+    var response = await apiConnection(taskPath, type, body: {"name": name});
+    if (response.statusCode == 201) {
+      final ResponseTaskSchema tasks =
+          ResponseTaskSchema.fromJson(jsonDecode(response.body));
       notifyListeners();
+      return tasks;
+    } else {
+      final ResponseErrorSchema error =
+          ResponseErrorSchema.fromJson(jsonDecode(response.body));
+      return error;
     }
   }
 
-  TaskType? findByid(String id) {
-    Iterable<TaskType> result = taskList.where((element) => element.id == id);
-    return result.isNotEmpty ? result.first : null;
+  Future<Object> retrieveTaskById(String id) async {
+    const String type = "get";
+    final String path = join(taskPath, id);
+
+    var response = await apiConnection(path, type);
+    if (response.statusCode == 200) {
+      final ResponseTaskSchema tasks =
+          ResponseTaskSchema.fromJson(jsonDecode(response.body));
+      return tasks;
+    } else {
+      final ResponseErrorSchema error =
+          ResponseErrorSchema.fromJson(jsonDecode(response.body));
+      return error;
+    }
   }
 
-  List<TaskType> findByStatus(Status status) {
-    Iterable<TaskType> result =
-        taskList.where((element) => element.status == status);
-    return result.isNotEmpty ? result.toList() : [];
+  Future<Object> putTask(String id, String name, int status) async {
+    const String type = "put";
+    final String path = join(taskPath, id);
+    final RequestTaskPutSchema schema = RequestTaskPutSchema();
+    schema.name = name;
+    schema.status = status;
+
+    var response = await apiConnection(path, type,
+        body: {"name": name, "status": status.toString()});
+    if (response.statusCode == 200) {
+      final ResponseTaskSchema tasks =
+          ResponseTaskSchema.fromJson(jsonDecode(response.body));
+      notifyListeners();
+      return tasks;
+    } else {
+      final ResponseErrorSchema error =
+          ResponseErrorSchema.fromJson(jsonDecode(response.body));
+      return error;
+    }
   }
 
-  int? findByidTheIndex(String id) {
-    int index = taskList.indexWhere((obj) => obj.id == id);
-    return index != -1 ? index : null;
-  }
+  Future<Object> deleteTask(String id) async {
+    const String type = "delete";
+    final String path = join(taskPath, id);
 
-  void changeTaskName(String newId) {
-    id = newId;
-    notifyListeners();
+    var response = await apiConnection(path, type);
+    if (response.statusCode == 204) {
+      notifyListeners();
+      return true;
+    } else {
+      final ResponseErrorSchema error =
+          ResponseErrorSchema.fromJson(jsonDecode(response.body));
+      return error;
+    }
   }
 }

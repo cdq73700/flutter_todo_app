@@ -1,58 +1,56 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:test_application/models/swagger/v1/model/response_task_schema.dart';
+import 'package:test_application/models/swagger/v1/model/task_schema.dart';
 import 'package:test_application/models/taskModel.widget.dart';
 
 class TaskTextField extends StatelessWidget {
   const TaskTextField(
-      {super.key,
-      required this.controller,
-      required this.focusNode,
-      required this.validator,
-      required this.onSaved});
+      {super.key, required this.controller, required this.onFieldSubmitted});
 
   final TextEditingController controller;
-  final FocusNode focusNode;
-  final String? Function(String?) validator;
-  final VoidCallback onSaved;
+  final VoidCallback onFieldSubmitted;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      controller: controller,
       autofocus: true,
-      focusNode: focusNode,
+      controller: controller,
       decoration: const InputDecoration(
         hintText: 'Enter todo name',
         contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
       ),
-      validator: validator,
-      onFieldSubmitted: (value) {
-        onSaved();
-      },
+      onFieldSubmitted: (value) => onFieldSubmitted(),
     );
   }
 }
 
 class TaskDetailTextField extends StatelessWidget {
   const TaskDetailTextField(
-      {super.key,
-      required this.task,
-      required this.validator,
-      required this.onSaved});
+      {super.key, required this.task, required this.controller});
 
-  final TaskType task;
-  final String? Function(String?) validator;
-  final Function(String, String, Status) onSaved;
+  final TaskSchema task;
+  final TextEditingController controller;
 
   @override
   Widget build(BuildContext context) {
-    final TextEditingController controller =
-        TextEditingController(text: task.name);
     return TextFormField(
-      controller: controller,
-      validator: validator,
-      onEditingComplete: () {
-        onSaved(task.id, controller.text, task.status);
-      },
-    );
+        controller: controller,
+        onFieldSubmitted: (value) => putTask(context, task, value));
+  }
+
+  Future<Object?> putTask(
+      BuildContext context, TaskSchema task, String name) async {
+    final String? id = task.id;
+    if (id != null) {
+      final taskProvider = Provider.of<TaskModel>(context, listen: false);
+      final Object tasks = await taskProvider.putTask(id, name, task.status);
+
+      if (tasks is ResponseTaskSchema) {
+        return tasks;
+      }
+      return tasks;
+    }
+    return null;
   }
 }
