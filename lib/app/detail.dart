@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_todo_app/widgets/Button/statusFloatingActionButton.widget.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_todo_app/models/swagger/v1/model/response_task_schema.dart';
 import 'package:flutter_todo_app/models/swagger/v1/model/task_schema.dart';
@@ -34,7 +35,7 @@ class _Detail extends State<Detail> {
             body = TaskListDetail(task: task, controller: controller);
             status = task.status;
           } else {
-            body = const Text("done");
+            body = const SizedBox();
           }
         } else {
           body = const SizedBox();
@@ -50,17 +51,10 @@ class _Detail extends State<Detail> {
             ],
           ),
           body: body,
-          floatingActionButton: FloatingActionButton(
-            onPressed: () async {
-              onPressed(controller, Status.values[status], navigator);
-            },
-            child: Text.rich(
-              TextSpan(
-                  text: Status.values[status] == Status.incomplete
-                      ? Status.completion.displayName
-                      : Status.incomplete.displayName),
-            ),
-          ),
+          floatingActionButton: StatusFloatingActionButton(
+              status: status,
+              onPressed: () async =>
+                  onPressed(controller, Status.values[status], navigator)),
         );
       },
     );
