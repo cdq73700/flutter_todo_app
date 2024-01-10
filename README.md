@@ -1,16 +1,34 @@
-# flutter_todo_app
+# flutter todo リスト アプリケーション
 
-A new Flutter project.
 
-## Getting Started
+## 概要
 
-This project is a starting point for a Flutter application.
+todoリストアプリケーションは、私のスキルを紹介することを目的としています。
 
-A few resources to get you started if this is your first Flutter project:
+## 技術スタック
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+### Flutter アプリケーション
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+* dart
+* flutter
+
+### バックエンド
+
+* TypeScript
+* Nest.Js
+* TypeORM
+* SQLite
+
+### その他
+
+* swagger editer
+* swagger codegen
+
+
+## ライセンス
+
+本プロジェクトは、MIT ライセンスの下で提供されています。ライセンス全文はリポジトリ内の [LICENSE](/LICENSE) ファイルで確認できます。
+
+また、本プロジェクトで使用されたサードパーティのパッケージやツールには、それぞれのライセンスが適用されています。これらのライセンスについての詳細は、[licenses](/licenses) ディレクトリ内の各ファイルを参照してください。
+
+このプロジェクトを利用する際には、本ライセンスおよびサードパーティのライセンスに同意したものと見なされます。詳細なライセンス情報に関して疑問がある場合は、各ライセンスの該当文書を参照するか、開発者にお問い合わせください。
